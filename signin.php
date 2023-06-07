@@ -1,14 +1,13 @@
-<?php include('db_signin.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <title>Trash level Monitoring</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+        <!-- Db_con connection -->
+        <?php include('db_signin.php'); ?>
 
+            <!-- Loading bar -->
+            <?php include('spinner.php');?>
+
+<head>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -31,84 +30,84 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
-    
 </head>
 
-<body>
+    <body>
+        <div class="container-fluid position-relative d-flex p-0" style="background-color: #298d5f;">
+            <!-- Sign In Start -->
+            <div class="container-fluid">
+                <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                        <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3" style="height:380px">            
+                            <div style="text-align:center;margin-bottom:20px;">
+                                <h3>Sign In</h3>
+                            </div>
+                            <form action="" method="POST">
+                                <div class="form-floating mb-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="font-size:20px;">
+                                            <i class="fas fa-user-alt"></i>
+                                        </span>
+                                        <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" style="padding: 15px;">
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="font-size:20px;">
+                                            <i class="fas fa-key"></i>
+                                        </span>
+                                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" style="padding: 15px;">
+                                            <i class="password-icon" onclick="togglePasswordVisibility()" style="font-size: 30px;">&#128065;</i>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary py-3 w-100 mb-4" id="login-button" style="margin-top:30px;">Sign In</button>
+                            </form>
+                            <script>
+                                <?php
+                                    if ($loginStatus === false) {
+                                        echo 'Swal.fire({
+                                                icon: "error",
+                                                title: "Invalid Credentials",
+                                                text: "Incorrect email or password",
+                                                });';
+                                    }
+                                ?>
+                                    document.getElementById("login-button").addEventListener("click", function(event) {
+                                        var email = document.getElementById("email").value;
+                                        var password = document.getElementById("password").value;
 
-    <div class="container-fluid position-relative d-flex p-0" style="background-color: #298d5f;">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+                                            if (!email || !password) {
+                                                event.preventDefault();
+                                                Swal.fire({
+                                                icon: 'error',
+                                                title: 'Can\'t Login',
+                                                text: 'Please fill in both email and password!',
+                                                });
+                                            }
+                                            });
 
+                                    function togglePasswordVisibility() {
+                                        var passwordField = document.getElementById("password");
+                                        var icon = document.querySelector(".password-icon");
 
-        <!-- Sign In Start -->
-        <div class="container-fluid">
-            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3" style="height:380px">            
-                        <div style="text-align:center;margin-bottom:20px;">
-                            <h3>Sign In</h3>
+                                            if (passwordField.type === "password") {
+                                                passwordField.type = "text";
+                                                icon.innerHTML = "&#128064;";
+                                            } 
+                                            else {
+                                                passwordField.type = "password";
+                                                icon.innerHTML = "&#128065;";
+                                            }
+                                        }
+                            </script>
                         </div>
-                        <form action="" method="POST">
-                            <div class="form-floating mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text" style="font-size:20px;">
-                                        <i class="fas fa-user-alt"></i>
-                                    </span>
-                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" style="padding: 15px;">
-                                </div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text" style="font-size:20px;">
-                                        <i class="fas fa-key"></i>
-                                    </span>
-                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" style="padding: 15px;">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" id="login-button" style="margin-top:30px;">Sign In</button>
-                        </form>
-                        <script>
-    <?php
-    if ($loginStatus === false) {
-        echo 'Swal.fire({
-                  icon: "error",
-                  title: "Invalid Credentials",
-                  text: "Incorrect email or password",
-                });';
-    }
-    ?>
-</script>
-<script>
-    document.getElementById("login-button").addEventListener("click", function(event) {
-      var email = document.getElementById("email").value;
-      var password = document.getElementById("password").value;
-
-      if (!email || !password) {
-        event.preventDefault();
-        Swal.fire({
-          icon: 'error',
-          title: 'Can\'t Login',
-          text: 'Please fill in both email and password!',
-        });
-      }
-    });
-  </script>
                     </div>
                 </div>
             </div>
+            <!-- Sign In End -->
         </div>
-        <!-- Sign In End -->
-    </div>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -125,5 +124,14 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
+<style>
+    .password-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+</style>
 
 </html>
