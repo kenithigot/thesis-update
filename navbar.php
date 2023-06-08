@@ -103,6 +103,9 @@ cursor: pointer;
 #logoutButton:hover {
 background-color: #d32f2f;
 }
+.content .navbar .sidebar-toggler{
+    border-radius:10px;
+}
 </style>
 
 <script>

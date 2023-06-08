@@ -9,6 +9,9 @@
             <!-- Loading bar -->
             <?php include('spinner.php');?>
 
+              <!-- db connection -->
+              <?php include('db_dashboard.php');?>
+
 <html>
     <head>
         <!-- Favicon -->
@@ -44,6 +47,11 @@
         <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        
+
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
     </head>
@@ -55,89 +63,106 @@
         <div class="container-fluid pt-6 px-4">
             <div class="row g-4">
                 <div class="col-sm-6 col-xl-4">  
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:330px;">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:430px;border-radius:45px;margin-left:auto;">
                         <div class="ms-3">   
-                            <div style="text-align:center;margin-left:-20px;">
-                                <h6>Trash Bin 1</h6>
-                                <h6 style="font-size:small;">Biodegradable</h6>
+                            <div style="text-align:center;">
+                                <h4>Trash Bin 1</h4>
+                                <h6 style="margin-top:-7px;margin-bottom:20px;">[ Biodegradable ]</h6>
                             </div>
-                            <div class="progress-container">
-                                <div class="progress progress-bar-vertical " style="border-radius:140px;height:250px; width:250px;">
+                            <div class="progress-container" style="width:350px;">
+                                <div class="progress progress-bar-vertical " style="border-radius:140px;height:220px; width:220px;">
                                     <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>  
                                 </div>
-                                <button class="custom-button">Click Me</button> 
+                                <div class="heading-container">
+                                    <h5 style="margin-left:14px;">Status</h5>
+                                    <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button> 
+                                </div>
                             </div>
-                            <button id="logoutButton" style="width:110px;border:solid 2px;margin-top:15px;border-radius: 30rem;padding: 1px 20px;font-size: 18px; ">Update</button> 
-                            <button id="logoutButton" style="width:110px;border:solid 2px;margin-top:15px;margin-left:25px;border-radius: 30rem;padding: 1px 20px;font-size: 18px;">Reset</button>                                     
+                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;border-radius: 30rem;padding: 1px 20px;font-size:18px;margin-left:49px; ">Update</button> 
+                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;margin-left:25px;border-radius:30rem;padding:1px 20px;font-size:18px;">Reset</button>                                     
                         </div>                
                     </div>       
                 </div>
                 <div class="col-sm-6 col-xl-4">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:280px;height:400px;margin:auto;" >
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:280px;height:400px;margin:auto;border-radius:2.5rem;" >
                         <div class="ms-3">
-                            <h6 style="margin-top:-180px; margin-left:45px;">Color Indicator</h6>
+                                <h4 style="margin-top:-180px; margin-left:23px;">Color Indicator</h4>                         
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-4">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:330px;margin-right:auto">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"  style="width:430px;border-radius:45px;margin-right:auto;">
                         <div class="ms-3">
-                            <div style="text-align:center;margin-left:-20px;">
-                                <h6>Trash Bin 2</h6>
-                                <h6 style="font-size:small;">Non-Biodegradable</h6>
+                            <div style="text-align:center;">
+                                <h4>Trash Bin 2</h4>
+                                <h6 style="margin-top:-7px;margin-bottom:20px;">[ Non-Biodegradable ]</h6>
                             </div>
-                            <div class="progress progress-bar-vertical" style="border-radius:140px;height:250px; width:250px;">
+                            <div class="progress-container" style="width:350px;">
+                            <div class="progress progress-bar-vertical" style="border-radius:140px;height:220px; width:220px;">
                                 <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>  
                             </div>
-                            <button id="logoutButton" style="width:110px;border:solid 2px;margin-top:15px;border-radius: 30rem;padding: 1px 20px;font-size: 18px;">Update</button> 
-                            <button id="logoutButton" style="width:110px;border:solid 2px;margin-top:15px;margin-left:25px;border-radius: 30rem;padding: 1px 20px;font-size: 18px;">Reset</button>                                     
+                            <div class="heading-container">
+                                    <h5 style="margin-left:14px;">Status</h5>
+                                    <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button> 
+                                </div>
+                            </div>
+                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;border-radius:30rem;padding:1px 20px;font-size:18px;margin-left:49px;">Update</button> 
+                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;margin-left:25px;border-radius:30rem;padding:1px 20px;font-size:18px;">Reset</button>                                     
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <br><br>
-        <div class="col-12">
-            <div class="bg-secondary rounded h-100 p-4" style="margin-left:25px;margin-right:25px">
-                <h5 class="mb-1">Data Reading Log</h5>
-                <div class="table-responsive">
-                    <table class="table" style="text-align:center;">
-                        <thead>
-                            <tr>
-                                <th scope="col" style="border-right:solid; color: #0f1116">Time - Date</th>
-                                <th scope="col" style="border-right:solid; color: #0f1116">Biodegradable Bin</th>
-                                <th scope="col" style="border-right:solid; color: #0f1116">Status</th>
-                                <th scope="col" style="border-right:solid; color: #0f1116">Non-Biodegradable Bin</th>
-                                <th scope="col" style="border-right:solid; color: #0f1116">Status</th>                          
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
-                                <td>USA</td>            
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                                <td>UK</td>             
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>jacob@email.com</td>
-                                <td>AU</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <table id="myTable">
+            <thead>
+                <tr style="text-align:center;">
+                    <th >Time</th>
+                    <th>Date</th>
+                    <th>Biodegradable Bin</th>
+                    <th>Status</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Non-Biodegradable Bin</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+        </table>
+        <script>
+            $(document).ready(function() {
+                $('#myTable').DataTable({
+                    ajax: {
+                    url: 'db_dashboard.php', // Replace with the URL to your PHP script
+                    dataSrc: '' // Leave empty if your PHP script returns an array of objects directly
+                    },
+                    columns: [
+                    { data: 'time_bin_1' },
+                    { data: 'date_bin_1' },
+                    { data: 'bio_bin_1' },
+                    { data: 'status_bin_1' },
+                    { data: 'time_bin_2' },
+                    { data: 'date_bin_2' },
+                    { data: 'nonbio_bin2' },
+                    { data: 'status_bin_2' }
+                    ]
+                });
+            });
+        </script>
+        <!-- Footer Start -->
+        <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">HTML Codex</a>, All right Reserved.
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Designed By: <a href="https://github.com/kenithigot">Kenith S. Igot</a> & <br><a href="https://htmlcodex.com">Abel S. Lerio</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <!-- Footer End -->
     </div>
 
 <style>
@@ -196,8 +221,40 @@ transition: height 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.heading-container {
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+#myTable {
+      background-color: #ffffff;
+}
+.dataTables_wrapper{
+    background-color: #ffffff;
+    border-radius:0.5rem;
+}
+.dataTables_wrapper .dataTables_filter input {
+    margin-right:20px;
+    margin-top:10px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    margin-left:20px;
+} 
+.dataTables_wrapper .dataTables_length {
+    margin-left:20px;
+    margin-top:10px;
 }
 </style>
+
+<script>
+$(document).ready(function() {
+  $('#myTable').DataTable();
+});
+</script>
 </body>
+  
 </html>
