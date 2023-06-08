@@ -34,15 +34,19 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
 </head>
 
-    <body>
-        <div class="container-fluid position-relative d-flex p-0" style="background-color: #298d5f;">
+<body>
+    <div class="container-fluid position-relative d-flex p-0" style="background-color: #3EA055;">
             <!-- Sign In Start -->
-            <div class="container-fluid">
-                <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                        <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3" style="height:380px">            
+            <div class="container-fluid ">
+                <div class="row h-40 align-items-center justify-content-center" style="min-height: 100vh">
+                    <div class="col-12 col-sm-8 col-md-8 col-lg-5 col-xl-4">
+                        <div style="align-content:center;margin-bottom:15px;">
+                            <img src="ccsea.png" alt="Image 1" style="height:150px;">
+                            <img src="lasalle.png" alt="Image 2" style="height:150px;">
+                            <img src="cpe.png" alt="Image 3" style="height:150px;">
+                        <div class=" border rounded p-4 p-sm-5 my-4 mx-3" style="height:380px; background-image: url('image.jpg');">            
                             <div style="text-align:center;margin-bottom:20px;">
-                                <h3>Sign In</h3>
+                                    <h3>Sign In</h3>
                             </div>
                             <form action="" method="POST">
                                 <div class="form-floating mb-3">
@@ -125,6 +129,10 @@
     <script src="js/main.js"></script>
 </body>
 <style>
+    #login-button {
+        background-color: #50C878; /* Replace with your desired color */
+        color: white; /* Optionally, change the text color */
+    }
     .password-icon {
       position: absolute;
       top: 50%;
