@@ -55,15 +55,18 @@
         <div class="container-fluid pt-6 px-4">
             <div class="row g-4">
                 <div class="col-sm-6 col-xl-4">  
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:auto;margin:auto;margin-left:185px;">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:330px;">
                         <div class="ms-3">   
                             <div style="text-align:center;margin-left:-20px;">
                                 <h6>Trash Bin 1</h6>
                                 <h6 style="font-size:small;">Biodegradable</h6>
                             </div>
+                            <div class="progress-container">
                                 <div class="progress progress-bar-vertical " style="border-radius:140px;height:250px; width:250px;">
                                     <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>  
-                                </div> 
+                                </div>
+                                <button class="custom-button">Click Me</button> 
+                            </div>
                             <button id="logoutButton" style="width:110px;border:solid 2px;margin-top:15px;border-radius: 30rem;padding: 1px 20px;font-size: 18px; ">Update</button> 
                             <button id="logoutButton" style="width:110px;border:solid 2px;margin-top:15px;margin-left:25px;border-radius: 30rem;padding: 1px 20px;font-size: 18px;">Reset</button>                                     
                         </div>                
@@ -77,7 +80,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-4">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:auto;margin:auto;margin-right:185px;">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:330px;margin-right:auto">
                         <div class="ms-3">
                             <div style="text-align:center;margin-left:-20px;">
                                 <h6>Trash Bin 2</h6>
@@ -183,6 +186,17 @@ margin-right: 5px;
 .progress-bar-vertical .progress-bar {
 transition: height 0.3s ease;
     }
+}
+.custom-button {
+  margin-top: 10px;
+  /* Additional button styles */
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 </style>
 </body>
