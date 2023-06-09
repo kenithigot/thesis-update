@@ -65,10 +65,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-              </div>
-              <div class="form-group">
                 <label for="email">Email Address:</label>
                 <input type="email" id="email" name="email" required>
               </div>
@@ -107,7 +103,7 @@
                       height: 20vh;
                   }
               .container {
-                width: 600px;
+                width: 500px;
                 margin: 0 auto;
                 padding: 90px;
                 background-color: #fff;
