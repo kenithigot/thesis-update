@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
-    <head>
-    <?php include('sidebar.php');?>
-    <?php include('navbar.php');?>
-    <?php include('spinner.php');?>
+
+        <!-- Db_con connection -->
+        <?php include('db_signin.php'); ?>
+
+            <?php include('sidebar.php');?>
+            <?php include('navbar.php');?>
+            <?php include('spinner.php');?>
+<head>
+
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -47,7 +51,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
-    </head>
+</head>
 <body>
      <div class="content">
         <div class="container ">
