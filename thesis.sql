@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 05:51 AM
+-- Generation Time: Jun 09, 2023 at 03:13 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -28,23 +28,23 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `data_bin` (
-  `data_id` int(15) NOT NULL,
-  `time_bin_1` varchar(255) NOT NULL,
-  `date_bin_1` varchar(255) NOT NULL,
-  `bio_bin_1` varchar(255) NOT NULL,
-  `status_bin_1` varchar(255) NOT NULL,
-  `time_bin_2` varchar(255) NOT NULL,
-  `date_bin_2` varchar(255) NOT NULL,
-  `nonbio_bin2` varchar(255) NOT NULL,
-  `status_bin_2` varchar(255) NOT NULL
+  `reading_bin` int(15) NOT NULL,
+  `date_bin1` varchar(255) NOT NULL,
+  `time_bin1` varchar(255) NOT NULL,
+  `trash_bin1` varchar(255) NOT NULL,
+  `status_bin1` varchar(255) NOT NULL,
+  `date_bin2` varchar(255) NOT NULL,
+  `time_bin2` varchar(255) NOT NULL,
+  `trash_bin2` varchar(255) NOT NULL,
+  `status_bin2` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `data_bin`
 --
 
-INSERT INTO `data_bin` (`data_id`, `time_bin_1`, `date_bin_1`, `bio_bin_1`, `status_bin_1`, `time_bin_2`, `date_bin_2`, `nonbio_bin2`, `status_bin_2`) VALUES
-(1, '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `data_bin` (`reading_bin`, `date_bin1`, `time_bin1`, `trash_bin1`, `status_bin1`, `date_bin2`, `time_bin2`, `trash_bin2`, `status_bin2`) VALUES
+(1, 'June 8, 2023', '8:00 AM', '50 cm', 'Full', 'June 8, 2023', '8:00 AM', '35 cm', 'Half_full');
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ INSERT INTO `thesis_trial` (`id`, `email_address`, `password`, `first_name`, `la
 -- Indexes for table `data_bin`
 --
 ALTER TABLE `data_bin`
-  ADD PRIMARY KEY (`data_id`);
+  ADD PRIMARY KEY (`reading_bin`);
 
 --
 -- Indexes for table `thesis_trial`
@@ -92,7 +92,7 @@ ALTER TABLE `thesis_trial`
 -- AUTO_INCREMENT for table `data_bin`
 --
 ALTER TABLE `data_bin`
-  MODIFY `data_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reading_bin` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `thesis_trial`
