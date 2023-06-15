@@ -7,18 +7,27 @@ $database = 'thesis';
 // Create connection
 $conn = new mysqli($hostname, $username, $db_password, $database);
 
-// Query to retrieve data from the database
-$sql = "SELECT * FROM `data_bin`;";
-
-// Execute the query
-
-// Fetch data from the result set
-$result = mysqli_query($conn, $sql);
-$data = array();
-while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = $row;
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
+// Query to retrieve data from the database
+$sql = "SELECT * FROM `data_bin`";
+$result = $conn->query($sql);
+
+$data = array();
+
+// Fetch data from the result set
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+}
+
+// Close the connection
+$conn->close();
+
 // Return the data in JSON format
-echo json_encode($data);
+echo json_encode(array("data" => $data));
 ?>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
     <!-- Sidebar -->
-    <?php include('sidebar.php');?>
+    <?php include('bin_sidebar.php');?>
 
         <!-- Navigation bar -->
         <?php include('navbar.php');?>

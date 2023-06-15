@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
     <!-- Sidebar -->
-    <?php include('bin_sidebar.php');?>
+    <?php include('sidebar.php');?>
 
         <!-- Navigation bar -->
         <?php include('navbar.php');?>
@@ -58,7 +58,8 @@
 <body>
 
     <div class="content">
-    <h1 class="mb-4" style="text-align:center;padding-top:10px;">Trash Level Monitoring</h1> <!-- Display total sale at the top -->
+    <br>
+    <h1 class="mb-4" style="text-align:center;">Trash Level Monitoring</h1> <!-- Display total sale at the top -->
         <div class="container-fluid pt-6 px-4">
             <div class="row g-4">
                 <div class="col-sm-6 col-xl-4">  
@@ -112,12 +113,11 @@
                 </div>
             </div>
         </div>
-        <br>
+        <br><br>
         <div style="margin-left:25px;margin-right:25px;">
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr style="text-align:center;">
-                    <th >Reading</th>
                     <th >Time</th>
                     <th>Date</th>
                     <th>Biodegradable Bin</th>
@@ -133,19 +133,15 @@
 	        $('#example').DataTable({
 		        ajax: 'db_dashboard.php',
                 columns: [
-                    { data: 'reading_bin' },
-                    { data: 'date_bin1' },
-                    { data: 'time_bin1' },
-                    { data: 'trash_bin1' },
-                    { data: 'status_bin1' },
-                    { data: 'date_bin2' },
-                    { data: 'time_bin2' },
-                    { data: 'trash_bin2' },
-                    { data: 'status_bin2' }
-                    ],
-                    columnDefs: [
-            { className: 'dt-center', targets: '_all' }
-        ]
+                    { data: 'time_bin_1' },
+                    { data: 'date_bin_1' },
+                    { data: 'bio_bin_1' },
+                    { data: 'status_bin_1' },
+                    { data: 'time_bin_2' },
+                    { data: 'date_bin_2' },
+                    { data: 'nonbio_bin2' },
+                    { data: 'status_bin_2' }
+                    ]
 	        });
         });
 	</script>
@@ -159,6 +155,7 @@
                             &copy; <a href="#">HTML Codex</a>, All right Reserved.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                             Designed By: <a href="https://github.com/kenithigot">Kenith S. Igot</a> & <br><a href="https://htmlcodex.com">Abel S. Lerio</a>
                         </div>
                     </div>
@@ -236,9 +233,6 @@ transition: height 0.3s ease;
     padding:10px;
     border-radius:0.5rem;
 }
-.dt-center {
-        text-align: center;
-    }
 
 </style>
 
