@@ -35,11 +35,12 @@
 <script src="js/main.js"></script>
 
   <!-- Sidebar Start -->
-<div class="sidebar pe-4 pb-3">
-    <nav class="navbar bg-secondary navbar-dark">
+<div class="sidebar pe-4 pb-5">
+    <nav class="navbar bg-secondary navbar-dark" style="border-bottom-right-radius: 20px;">
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
-                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                 <!-- <img src="lasalle.png" alt="Image 2" style="height: 150px;"> -->
+                <img class="rounded-circle" src="lasalle.png" alt="" style="width: 40px; height: 40px;">
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3" style="text-color:#0f1116;">
@@ -51,15 +52,14 @@
             <a href="overview.php" class="nav-item nav-link" style="color:black;"><i class="fas fa-book-open me-1"></i> Overview</a>
                 <a href="dashboard.php" class="nav-item nav-link"style="color:black;"><i class="fa fa-th me-2"></i>Dashboard</a>
 
-                <div class="nav-item dropdown">
+                <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color:black;"><i class="fas fa-users me-2"></i>Staff</a>
                     <div class="dropdown-menu bg-transparent border-0">
                         <a href="admin_information.php" class="dropdown-item" style="color:black;">My Information</a>
                         <a href="register_staff.php" class="dropdown-item" style="color:black;">Register staff</a>
-                        <a href="element.html" class="dropdown-item" style="color:black;">Other Elements</a>
                     </div>
-                </div>
-                <div class="nav-item dropdown">
+                </div> -->
+                <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Element</a>
                     <div class="dropdown-menu bg-transparent border-0">
                         <a href="button.html" class="dropdown-item">Buttons</a>
@@ -79,7 +79,7 @@
                         <a href="404.html" class="dropdown-item">404 Error</a>
                         <a href="blank.html" class="dropdown-item">Blank Page</a>
                     </div>
-                </div>
+                </div> -->
         </div>
     </nav>
 </div>

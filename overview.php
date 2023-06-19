@@ -9,7 +9,7 @@
             <!-- Spinner -->
             <?php include('spinner.php');?>
 
-<html>
+
     <head>
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
