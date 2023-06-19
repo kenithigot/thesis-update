@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include('sidebar.php');?>
+<?php include('bin_sidebar.php');?>
 <?php include('navbar.php');?>
 <?php include('spinner.php');?>
 

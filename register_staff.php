@@ -4,7 +4,7 @@
         <!-- Db_con connection -->
         <?php include('db_signin.php'); ?>
 
-            <?php include('sidebar.php');?>
+            <?php include('bin_sidebar.php');?>
             <?php include('navbar.php');?>
             <?php include('spinner.php');?>
 <head>

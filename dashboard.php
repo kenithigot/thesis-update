@@ -50,124 +50,8 @@
         <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
 
    
-
-    
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-    </head>
-<body>
-
-    <div class="content">
-    <h1 class="mb-4" style="text-align:center;padding-top:10px;">Trash Level Monitoring</h1> <!-- Display total sale at the top -->
-        <div class="container-fluid pt-6 px-4">
-            <div class="row g-4">
-                <div class="col-sm-6 col-xl-4">  
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:430px;border-radius:45px;margin-left:auto;">
-                        <div class="ms-3">   
-                            <div style="text-align:center;">
-                                <h4>Trash Bin 1</h4>
-                                <h6 style="margin-top:-7px;margin-bottom:20px;">[ Biodegradable ]</h6>
-                            </div>
-                            <div class="progress-container" style="width:350px;">
-                                <div class="progress progress-bar-vertical " style="border-radius:140px;height:220px; width:220px;">
-                                    <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>  
-                                </div>
-                                <div class="heading-container">
-                                    <h5 style="margin-left:14px;">Status</h5>
-                                    <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button> 
-                                </div>
-                            </div>
-                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;border-radius: 30rem;padding: 1px 20px;font-size:18px;margin-left:49px; ">Update</button> 
-                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;margin-left:25px;border-radius:30rem;padding:1px 20px;font-size:18px;">Reset</button>                                     
-                        </div>                
-                    </div>       
-                </div>
-                <div class="col-sm-6 col-xl-4">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:280px;height:400px;margin:auto;border-radius:2.5rem;" >
-                        <div class="ms-3">
-                                <h4 style="margin-top:-180px; margin-left:23px;">Color Indicator</h4>                         
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-4">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"  style="width:430px;border-radius:45px;margin-right:auto;">
-                        <div class="ms-3">
-                            <div style="text-align:center;">
-                                <h4>Trash Bin 2</h4>
-                                <h6 style="margin-top:-7px;margin-bottom:20px;">[ Non-Biodegradable ]</h6>
-                            </div>
-                            <div class="progress-container" style="width:350px;">
-                            <div class="progress progress-bar-vertical" style="border-radius:140px;height:220px; width:220px;">
-                                <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>  
-                            </div>
-                            <div class="heading-container">
-                                    <h5 style="margin-left:14px;">Status</h5>
-                                    <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button> 
-                                </div>
-                            </div>
-                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;border-radius:30rem;padding:1px 20px;font-size:18px;margin-left:49px;">Update</button> 
-                            <button id="logoutButton" style="width:105px;border:solid 2px;margin-top:20px;margin-left:25px;border-radius:30rem;padding:1px 20px;font-size:18px;">Reset</button>                                     
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div style="margin-left:25px;margin-right:25px;">
-        <table id="example" class="display" style="width:100%">
-            <thead>
-                <tr style="text-align:center;">
-                    <th >Reading</th>
-                    <th >Time</th>
-                    <th>Date</th>
-                    <th>Biodegradable Bin</th>
-                    <th>Status</th>
-                    <th>Time</th>
-                    <th>Date</th>
-                    <th>Non-Biodegradable Bin</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <script>
-        $(document).ready(function () {
-	        $('#example').DataTable({
-		        ajax: 'db_dashboard.php',
-                columns: [
-                    { data: 'reading_bin' },
-                    { data: 'date_bin1' },
-                    { data: 'time_bin1' },
-                    { data: 'trash_bin1' },
-                    { data: 'status_bin1' },
-                    { data: 'date_bin2' },
-                    { data: 'time_bin2' },
-                    { data: 'trash_bin2' },
-                    { data: 'status_bin2' }
-                    ],
-                    columnDefs: [
-            { className: 'dt-center', targets: '_all' }
-        ]
-	        });
-        });
-	</script>
-        </table>     
-        </div>
-        <!-- Footer Start -->
-        <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">HTML Codex</a>, All right Reserved.
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            Designed By: <a href="https://github.com/kenithigot">Kenith S. Igot</a> & <br><a href="https://htmlcodex.com">Abel S. Lerio</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
-    </div>
-
-<style>
+        <style>
+            
 .progress-bar-vertical {
   width: 20px;
   min-height: 200px;
@@ -241,6 +125,110 @@ transition: height 0.3s ease;
     }
 
 </style>
+    
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+    </head>
+<body>
+
+    <div class="content">
+    <h1 class="mb-4" style="text-align:center;padding-top:10px;">Trash Level Monitoring</h1> <!-- Display total sale at the top -->
+        <div class="container-fluid pt-6 px-4">
+            <div class="row g-4" style="margin-top:-40px;">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto;border-radius: 0.5rem;">
+                        <div class="ms-3">
+                            <div class="text-center">
+                                <h4>Trash Bin 1</h4>
+                                <h6 style="margin-top:-7px;margin-bottom:20px;">[ Biodegradable ]</h6>
+                            </div>
+                            <div class="progress-container" style="width:100%;">
+                                <div class="progress progress-bar-vertical" style="border-radius:140px; height:220px; max-width:220px; width:200px;">
+                                    <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>
+                                </div>
+                                <div class="heading-container">
+                                    <h5 style="margin-left:14px;">Status</h5>
+                                    <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button>
+                                </div>
+                            </div>
+                            <div style="">
+                            <button id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Update</button>
+                            <button id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Reset</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:280px;height:390px;margin:auto;border-radius:2.5rem;" >
+                        <div class="ms-3">
+                                <h4 style="margin-top:-180px; margin-left:23px;">Color Indicator</h4>                         
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto; border-radius: 0.5rem;">
+                    <div class="ms-3">
+                        <div class="text-center">
+                            <h4>Trash Bin 2</h4>
+                            <h6 style="margin-top:-7px;margin-bottom:20px;">[ Non-Biodegradable ]</h6>
+                        </div>
+                        <div class="progress-container" style="max-width:350px;">
+                            <div class="progress progress-bar-vertical" style="border-radius:140px;height:220px; max-width:220px; width:200px;">
+                                <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>
+                            </div>
+                            <div class="heading-container">
+                                <h5 style="margin-left:14px;">Status</h5>
+                                <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button>
+                            </div>
+                        </div>
+                        <div style="">
+                            <button type="submit" id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Update</button>
+                            <button type="submit" id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <br>
+        <div style="margin-left:25px;margin-right:25px;">
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr style="text-align:center;">
+                    <th >Reading</th>
+                    <th >Date and Time</th>
+                    <th>Biodegradable Bin</th>
+                    <th>Status</th>
+                    <th >Date and Time</th>
+                    <th>Non-Biodegradable Bin</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <script>
+        $(document).ready(function () {
+	        $('#example').DataTable({
+		        ajax: 'db_dashboard.php',
+                columns: [
+                    { data: 'data_id' },
+                    { data: 'date_time' },
+                    { data: 'bin1' },
+                    { data: 'status1' },
+                    { data: 'date_time' },
+                    { data: 'bin2' },
+                    { data: 'status2' },
+                    ],
+                    columnDefs: [
+            { className: 'dt-center', targets: '_all' }
+        ]
+	        });
+            
+        });
+	</script>
+        </table>     
+        </div>
+    </div>
+
+
 
 </body>
   
