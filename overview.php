@@ -62,7 +62,7 @@
                         data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home
                     </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" 
                         data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"> Profile
                     </button>
@@ -71,12 +71,12 @@
                     <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" 
                         data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile
                     </button>
-                </li>
-                <li class="nav-item" role="presentation">
+                </li> -->
+                <!-- <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Objective of the Study
                     </button>
-                </li>
+                </li> -->
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact
@@ -85,12 +85,31 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    Sit sanctus et stet dolor kasd kasd takimata. Dolor stet dolores nonumy et dolor et eos lorem et, diam ipsum nonumy elitr sanctus dolores voluptua sit dolor, at et et amet nonumy elitr ea et ipsum. Elitr lorem et dolore invidunt eirmod voluptua lorem sed. Sed eirmod sadipscing eos tempor.
-                </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    Invidunt rebum voluptua lorem eirmod dolore. Amet no sed sanctus lorem ea. Nonumy sit stet sit magna. Rebum rebum ipsum clita erat consetetur, sit dolor sit clita et amet. Est et clita dolore takimata, sea dolores tempor erat consetetur lorem. Consetetur sea sadipscing dolor et dolores et stet, tempor elitr.
-                </div>
+                <p style="text-align:justify;">Smart trash bin monitoring benefit the school by reducing the frequency of waste collection needed resulting in less manpower needed, emissions, and fuel use. It will also help in reducing overflowing bins and unpleasant odors in the environment. 
+                </p>
+                <p style="text-align:justify;">The researchers will develop two smart trash bins, which will be placed near the fitness room in La Salle University - Ozamiz, considering  its distant area around the campus. The researchers will only monitor waste levels in biodegradable and non-biodegradable trash bins. The researchers will only include an RGB LED for a color indicator of trash level. With the help of the Wifi Module which connects to the cloud server, the General Service Office (GSO) will get a notification and the sensor data transmission between the hardware and software system will be possible.
+</p>
+            </div>
+                <!-- <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    d dolore. Amet no sed sipscing dolor et dolores et stet, tempor elitr.
+                </div> -->
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                    Et diam et est sed vero ipsum voluptua dolor et, sit eos justo ipsum no ipsum amet sed aliquyam dolore, ut ipsum sanctus et consetetur. Sit ea sit clita lorem ea g
+                <div class ="row">
+                    <div class="col-md-12">
+                        <h5 style="text-align:center;">Developers</h5>
+                    </div>
+                </div>
+                    <div class ="row">
+                        <div class="col-md-6">                    
+                            <p style="font-size:20px;text-align:center;padding-top:20px;"> <strong>Kenith S. Igot</strong></p>
+                            <p style="font-size:15px;text-align:center;"> BS - Computer Engineering<br> 09167767623 <br>kenith.igot@lsu.edu.ph</p>
+                        </div>
+                        <div class="col-md-6">                    
+                            <p style="font-size:20px;text-align:center;padding-top:20px;"> <strong>Abel S. Lerio</strong></p>
+                            <p style="font-size:15px;text-align:center;"> BS - Computer Engineering<br> 09639352078<br>abel.lerio@lsu.edu.ph</p>
+                        </div>
+                    </div>
+                </div>     
+                    <!-- <p style="font-size:15px;text-align:center;margin-top:10px;"> BS - Computer Engineering</p> -->
 </body>
 </html>
