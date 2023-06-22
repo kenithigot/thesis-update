@@ -35,7 +35,7 @@
 </head>
 
 <body>
-<div class="container-fluid position-relative d-flex p-0 mx-auto" style="background-image: url('OZ.png'); background-size: contain; background-repeat: no-repeat; background-position: center; height: 100vh; width: 2000px;">
+<div class="container-fluid position-relative d-flex p-0 mx-auto" style="background-image: url('OZ.png'); background-size: contain; background-repeat: no-repeat; background-position: center; height: 100vh;">
     <div class="container-fluid">
         <div class="row h-100 align-items-center justify-content-center">
             <div class="col-10 col-sm-8 col-md-8 col-lg-5 col-xl-4">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="  p-4 p-sm-5 my-4 mx-3" style="height: 380px;">
                     <div style="text-align: center; margin-bottom: 20px;">
-                        <h2 style= "color: #50C878; font-family: 'Comic Sans MS', cursive; font-style: italic;" >𝐒𝐢𝐠𝐧 𝐈𝐧</h2>
+                        <h2 style= "color: #50C878; font-family: 'Comic Sans MS', cursive;" >LOGIN</h2>
                     </div>
                     <form action="" method="POST">
                         <div class="form-floating mb-3">
