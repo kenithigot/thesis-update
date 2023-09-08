@@ -1,235 +1,409 @@
 <!DOCTYPE html>
+<html lang="en">
 
-    <!-- Sidebar -->
-    <?php include('bin_sidebar.php');?>
+<!-- Welcome Alert -->
+<?php include('welcome-script.php'); ?>
 
-        <!-- Navigation bar -->
-        <?php include('navbar.php');?>
+<!-- Sidebar -->
+<?php include('includes/sidebar.php'); ?>
 
-            <!-- Loading bar -->
-            <?php include('spinner.php');?>
+<!-- Navigation bar -->
+<?php include('includes/topbar.php');?>
 
+<!-- Loading bar -->
+<?php include('spinner.php');?>
 
-<html>
-    <head>
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+<!-- Db_datadelete connection -->
+<?php include('db_connections/bin1_bin2/db_datadelete.php'); ?>
 
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+<!-- Db_status connection -->
+<?php include('db_connections/bin1_bin2/db_status.php'); ?>
+                       
+<head>
 
-        <!-- Icon Font Stylesheet -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Header -->
+    <?php include('includes/header.php');?>
 
-        <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <title>Trash Level Monitoring - Dashboard</title>
 
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/chart/chart.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        
-        <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+    <!-- Libraries -->
+    <?php include('resources/libraries.php');?>
 
-   
-        <style>
-            
-.progress-bar-vertical {
-  width: 20px;
-  min-height: 200px;
-  margin-right: 20px;
-  background: #d0cece;
-  display: -webkit-box;  
-  display: -ms-flexbox;  
-  display: -webkit-flex; 
-  display: flex;        
-  align-items: flex-end;
-  -webkit-align-items: flex-end;
-  border: solid 2px;
-}
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
-.progress-bar-vertical .progress-bar {
-    width: 100%;
-      height: 0;
-      transition: height 0.6s ease;
-}
+    <!-- dashboard-style -->
+    <?php include('resources/dashboard-style.php');?>
 
-.progress-striped {
-      background-color: #ee5f5b;
-      background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-    }
-
-@media (max-width: 768px) {
-.progress-bar-vertical {
-min-height: 150px;
-margin-right: 10px;
-    }
-
-.progress-bar-vertical .progress-bar {
-transition: height 0.4s ease;
-    }
-}
-
-@media (max-width: 576px) {
-.progress-bar-vertical {
-min-height: 100px;
-margin-right: 5px;
-    }
-
-.progress-bar-vertical .progress-bar {
-transition: height 0.3s ease;
-    }
-}
-.custom-button {
-  margin-top: 10px;
-  /* Additional button styles */
-}
-
-.progress-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.heading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-.dataTables_wrapper {
-    background-color:white;
-    padding:10px;
-    border-radius:0.5rem;
-}
-.dt-center {
-        text-align: center;
-    }
-
-</style>
+    <script>
+        function updateProgressBars() {
+            $.ajax({
+                url: 'db_connections/bin1_bin2/get_bin_data.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    
+                    // Update progress bars with new percentages
+                    $('#progress-bar1').css('height', data.percentage1 + '%');
+                    $('#progress-bar2').css('height', data.percentage2 + '%');
+          
+                    // Update progress texts
+                    $('#progress-text1').text(data.percentage1 + '%');
+                    $('#progress-text2').text(data.percentage2 + '%');
+                },
+                
+                error: function (xhr, status, error) {
+                    console.error('Error fetching progress data:', error);
+                }
+            });
+        }
+        updateProgressBars();
     
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-    </head>
-<body>
+        // Refresh the progress bars 
+        setInterval(updateProgressBars, 1000);
+    </script>
 
+    <script>
+        function refreshButtonColors() {
+            $.ajax({
+                url: 'db_connections/bin1_bin2/get_button_colors.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    
+                    $('.custom-button1').css('background', data.bin1ButtonColor);
+                    $('.custom-button2').css('background', data.bin2ButtonColor);
+
+                    $('#progress-bar1').css('background', data.bin1ButtonColor);
+                    $('#progress-bar2').css('background', data.bin2ButtonColor);
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+
+        // Refresh button colors 
+        setInterval(refreshButtonColors, 10000);
+    </script>
+
+    <script>
+        function preventBack(){
+            window.history.forward()
+        };
+            setTimeout("preventBack()", 0);
+                window.onunload = function(){
+                null;
+            } 
+    </script>
+  
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+</head>
+
+<body >
     <div class="content">
-    <h1 class="mb-4" style="text-align:center;padding-top:10px;">Trash Level Monitoring</h1> <!-- Display total sale at the top -->
-        <div class="container-fluid pt-6 px-4">
+        <h1 class="mb-4" style="text-align:center;padding-top:10px;">Trash Level Monitoring</h1>
+
+        <?php
+            include('authentication.php');
+
+            $query = "SELECT location1 FROM thesis_data";
+            $result = $conn->query($query);
+
+            if ($result && $result->num_rows > 0) { 
+                $row = $result->fetch_assoc();
+                $location1 = $row['location1'];
+            } else {
+                $location1 = "Add Location"; 
+            }
+            $conn->close();
+        ?>
+
+        <h3 class="mb-5" style="text-align: center; padding-top: 10px; margin: 0; position: relative;">
+            Location: &nbsp;&nbsp;<u id="displayedLocation"><?php echo $location1; ?></u>
+            <button class="location-btn" data-toggle="modal" data-target="#editmodal">
+                <i class="bi bi-pencil-square btnicon"></i>
+            </button>
+        </h3>
+
+        <!-- Modal for Edit Location -->
+        <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">                       
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size:40px;margin-left:210px;">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </h5>                    
+                    </div>
+
+                    <form id="editForm"> 
+                        <div class="modal-body">               
+                            <div class="form-group">
+                                <label> Location: </label>
+                                <input type="text" name="location1" id="location1" class="form-control"
+                                    placeholder="Type the Location" required>
+                            </div>                          
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="savelocationbtn" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Split dropup button -->
+        <div class="dropdown-dash">
+            <select name="selectedbin" id="selectedbin" class="select-success" onchange="redirect()">
+                <option value=""selected disabled>Select Bin Here</option>
+                <option value="dashboard.php">Trash Bin 1 and 2</option>
+                <option value="dashboardv2.php">Trash Bin 3 and 4</option>
+                <option value="dashboardv3.php">Trash Bin 5 and 6</option>
+                <option value="dashboardv4.php">Trash Bin 7 and 8</option>
+                <option value="dashboardv5.php">Trash Bin 9 and 10</option>
+            </select>
+        </div>
+
+        <div class="container-fluid pt-6 px-4" style="margin-top:35px;">
             <div class="row g-4" style="margin-top:-40px;">
-                <div class="col-sm-6 col-lg-4">
-                    <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto;border-radius: 0.5rem;">
+                
+                <div class="col-sm-6 col-lg-4" >
+                    <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto;border-radius: 0.5rem;background-color:gray;">
                         <div class="ms-3">
                             <div class="text-center">
                                 <h4>Trash Bin 1</h4>
                                 <h6 style="margin-top:-7px;margin-bottom:20px;">[ Biodegradable ]</h6>
                             </div>
-                            <div class="progress-container" style="width:100%;">
-                                <div class="progress progress-bar-vertical" style="border-radius:140px; height:220px; max-width:220px; width:200px;">
-                                    <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>
+                            <div class="progress-container" style="width: 100%;">
+                                <div class="progress progress-bar-vertical" style="height: 220px;
+                                        max-width: 220px;
+                                        width: 200px;
+                                        position: relative;
+                                        border-width: 0 10px 30px 10px;
+                                        border-style: solid;
+                                        border-color: transparent transparent transparent transparent;
+                                        border-radius: 5% 5% 35% 35%;
+                                        border: 2px solid black;">
+                                    <div class="progress-bar progress-striped1" id="progress-bar1" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" aria-label="Progress:" style="height:;"></div>
+                                    <span class="progress-text" id="progress-text1"></span>
                                 </div>
                                 <div class="heading-container">
-                                    <h5 style="margin-left:14px;">Status</h5>
-                                    <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button>
+                                    <h5>Status</h5>
+                                    <button class="custom-button1" style="width: 55px; height: 55px; border-radius: 50%; margin-left: 1px; border: 2px solid #000;" disabled></button>
                                 </div>
                             </div>
-                            <div style="">
-                            <button id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Update</button>
-                            <button id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Reset</button>
                         </div>
-                        </div>
-                    </div>
+                    </div>             
                 </div>
-                <div class="col-sm-6 col-xl-4">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4" style="width:280px;height:390px;margin:auto;border-radius:2.5rem;" >
-                        <div class="ms-3">
-                                <h4 style="margin-top:-180px; margin-left:23px;">Color Indicator</h4>                         
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-sm-6 col-lg-4">
-                <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto; border-radius: 0.5rem;">
-                    <div class="ms-3">
-                        <div class="text-center">
-                            <h4>Trash Bin 2</h4>
-                            <h6 style="margin-top:-7px;margin-bottom:20px;">[ Non-Biodegradable ]</h6>
+                    <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-start p-4" style="width:280px;height:350px;margin:auto;border-radius:2.5rem; margin-top:25px;">
+                        <h4 class="text-center">Color Indicator</h4>
+                        <div class="mt-2 d-flex align-items-start justify-content-start">
+                            <div class="square-green" style="border: solid; height: 30px; width: 30px; background-color: #48b314; margin-right: 10px;"></div>
+                            <h5 class="mt-1">EMPTY</h5>
                         </div>
-                        <div class="progress-container" style="max-width:350px;">
-                            <div class="progress progress-bar-vertical" style="border-radius:140px;height:220px; max-width:220px; width:200px;">
-                                <div class="progress-bar progress-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%;"></div>
-                            </div>
-                            <div class="heading-container">
-                                <h5 style="margin-left:14px;">Status</h5>
-                                <button class="custom-button" style="margin-left:15px; width:70px; height:70px;border-radius:0.5rem;"></button>
-                            </div>
+                        <p class="text-center mt-2">Height of the trash is <strong> < 15 cm</strong></p>
+                        <div class="mb-1 d-flex align-items-start justify-content-start">
+                            <div class="square-orange" style="border: solid; height: 30px; width: 30px; background-color: #fdb81c; margin-right: 10px;"></div>
+                            <h5 class="mt-1">HALF-FULL</h5>
                         </div>
-                        <div style="">
-                            <button type="submit" id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Update</button>
-                            <button type="submit" id="logoutButton" class="btn btn-primary mt-4" style="border-radius: 30rem; padding: 1px 20px; font-size: 18px;">Reset</button>
+                        <p class="text-center">Height of the trash is <strong> >= 15 cm</strong> and <strong><=</strong> to <strong>36 cm</strong></p>    
+                        <div class="mb-1 d-flex align-items-start justify-content-start">
+                            <div class="square-red" style="border: solid; height: 30px; width: 30px; background-color: #fd100f; margin-right: 10px;"></div>           
+                            <h5 class="mt-1">FULL</h5>
+                        </div>
+                        <p class="text-center">Height of the trash is <strong> > 36 cm</strong></p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-4">
+                    <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto; border-radius: 0.5rem;">
+                        <div class="ms-3">
+                            <div class="text-center">
+                                <h4>Trash Bin 2</h4>
+                                <h6 style="margin-top:-7px;margin-bottom:20px;">[ Non-Biodegradable ]</h6>
+                            </div>
+                            <div class="progress-container" style="width: 100%;">
+                                <div class="progress progress-bar-vertical" style="height: 220px;
+                                        max-width: 220px;
+                                        width: 200px;
+                                        position: relative;
+                                        border-width: 0 10px 30px 10px;
+                                        border-style: solid;
+                                        border-color: transparent transparent transparent transparent;
+                                        border-radius: 5% 5% 35% 35%;
+                                        border: 2px solid black;">
+                                    <div class="progress-bar progress-striped2" id="progress-bar2" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" aria-label="Progress:" style="height:;"></div>
+                                    <span class="progress-text" id="progress-text2"></span>
+                                </div>
+                                <div class="heading-container">
+                                    <h5>Status</h5>
+                                    <button class="custom-button2" style="width: 55px; height: 55px; border-radius: 50%; margin-left: 1px; border: 2px solid #000;" disabled></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
+            <div style="margin-left: 25px; margin-right: 25px; text-align: center; margin-top:-20px;"> 
+                <div class="containertab">
+                    <div class="trash-table">
+                        <h3>Trash Bin 1</h3>
+                    </div>
+                    <div class="btn-containertab">
+                        <form action="" method="POST">
+                            <button type="submit" name="delete" class="btn btn-primary mt-4" style="padding:5px 10px;border-radius: 0.5rem; font-size: 16px; color: black; margin-bottom: 10px; background-color: white;">Delete Data</button>
+                        </form>
+                    </div>
+                </div>
+                <table id="trash-bin1" class="display" style="width:100%">
+                    <thead>
+                        <tr style="text-align:center;">
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Trash Type</th>
+                            <th>Trash Level (cm)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <script>
+                        $(document).ready(function () {
+                            var table = $('#trash-bin1').DataTable({
+                                ajax: 'db_connections/bin1_bin2/db_dashboard.php',
+                                columns: [
+                                    { data: 'timestamp_date'},
+                                    { data: 'timestamp_time'},
+                                    { data: 'trash_type1'},
+                                    { data: 'bin1'},
+                                    { data: 'status1'},
+                                ],
+                                columnDefs: [
+                                    { className: 'dt-center', targets: '_all' }
+                                ],
+                                dom: 'lBfrtip',
+                                buttons: [
+                                    'copy', 'csv', 'pdf'
+                                ],
+                                order: [[0, 'desc']]
+                            });
+
+                            setInterval(function () {
+                                table.ajax.reload(null, false);
+                            }, 1000);
+                        });
+                    </script>
+                </table><br>
+                
+                <div class="trash-table"><h3>Trash Bin 2</h3></div>            
+                <table id="trash-bin2" class="display" style="width:100%">
+                    <thead>
+                        <tr style="text-align:center;">
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Trash Type</th>
+                            <th>Trash Level (cm)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <script>
+                        $(document).ready(function () {
+                            var table = $('#trash-bin2').DataTable({
+                                ajax: 'db_connections/bin1_bin2/db_dashboard.php',
+                                columns: [
+                                    { data: 'timestamp_date'},
+                                    { data: 'timestamp_time'},
+                                    { data: 'trash_type2'},
+                                    { data: 'bin2'},
+                                    { data: 'status2'},
+                                ],
+                                columnDefs: [
+                                    { className: 'dt-center', targets: '_all' }
+                                ],
+                                dom: 'lBfrtip',
+                                buttons: [
+                                    'copy', 'csv', 'pdf'
+                                ],
+                                order: [[0, 'desc']]
+                            });
+
+                            setInterval(function () {
+                                table.ajax.reload(null, false);
+                            }, 1000);
+                        });
+                    </script>
+                </table>
             </div>
-        </div>
-        <br>
-        <div style="margin-left:25px;margin-right:25px;">
-        <table id="example" class="display" style="width:100%">
-            <thead>
-                <tr style="text-align:center;">
-                    <th >Reading</th>
-                    <th >Date and Time</th>
-                    <th>Biodegradable Bin</th>
-                    <th>Status</th>
-                    <th >Date and Time</th>
-                    <th>Non-Biodegradable Bin</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <script>
-        $(document).ready(function () {
-	        $('#example').DataTable({
-		        ajax: 'db_dashboard.php',
-                columns: [
-                    { data: 'data_id' },
-                    { data: 'date_time' },
-                    { data: 'bin1' },
-                    { data: 'status1' },
-                    { data: 'date_time' },
-                    { data: 'bin2' },
-                    { data: 'status2' },
-                    ],
-                    columnDefs: [
-            { className: 'dt-center', targets: '_all' }
-        ]
-	        });
-            
-        });
-	</script>
-        </table>     
-        </div>
-    </div>
+        </div><br>
 
+        <!-- Footer -->
+        <?php include('includes/footer.php');?>    
 
+    </div> 
+
+    <!-- Script -->
+    <?php include('resources/res-script.php');?>
 
 </body>
-  
+
+<script>
+    $(document).ready(function () {
+        $('.location-btn').on('click', function () {
+            var location = $('#displayedLocation').text();
+            $('#location1').val(location);
+            $('#editmodal').modal('show');
+        });
+
+        $('#savelocationbtn').on('click', function () {
+            var newLocation = $('#location1').val();
+
+            if (newLocation) {
+                $.ajax({
+                    type: "POST",
+                    url: "db_connections/bin1_bin2/db_location1.php",
+                    data: $('#editForm').serialize(),
+                    success: function (response) {
+                        if (response.trim() === "success") {
+                            // Update displayed location after successful database update
+                            $('#displayedLocation').text(newLocation);
+
+                            $('#editmodal').modal('hide');
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Location has been successfully updated!',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(function () {
+                                // Redirect to the same page after success message
+                                window.location.href = window.location.href;
+                            });
+                        } else {
+                            alert("Location Not Updated");
+                        }
+                    }
+                });
+            } else {
+                alert("Please fill in the new location.");
+            }
+        });
+    });
+</script>
+
 </html>
+
+
