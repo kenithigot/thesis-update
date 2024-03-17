@@ -1,3 +1,4 @@
+
 <!-- Customized Bootstrap Stylesheet -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -25,6 +26,19 @@
     .content .navbar .sidebar-toggler{
         border-radius:10px;
     }
+    
+    .settings {
+    background-color: transparent;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    }
+
+    .settings:hover {
+    background-color: #d32f2f;
+    }
+
 </style>
 
 <body>
@@ -39,13 +53,33 @@
                 </a>
                 <div class="navbar-nav align-items-center ms-auto">          
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <!-- <img src="lasalle.png" alt="Image 2" style="height: 150px;"> -->
-                            <img class="rounded-circle me-lg-2" src="imgs/user.png" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">GSO </span>
+                        <?php
+                            include('authentication.php');
+                            $userID = $_SESSION['admin_id'];
+                            $query = "SELECT * FROM add_admin WHERE admin_id = $userID";
+                            $sql_run =  mysqli_query($conn, $query);
+
+                            $user = mysqli_num_rows($sql_run) > 0;
+
+                            if($user){
+                                while($row = mysqli_fetch_assoc($sql_run)){
+                        ?>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">              
+                            <img class="rounded-circle me-lg-2" src="<?php echo $row['profilePicture']; ?>" alt="" style="width: 45px; height: 45px;border:1px solid green;">
+                            <span class="d-none d-lg-inline-flex" style="color:black;font-family:Open Sans;font-size:18px;"><?php echo $row['lastName']; ?> </span>
+                        <?php
+                                }
+                            }
+                        ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-2 rounded-0 rounded-bottom m-0">
-                            <button id="logoutButton" style="width: 150px;border: none;"><span class="fas fa-sign-out-alt" style="margin-right:30px;"></span>Logout</button>                            
+                            <button class="settings" style="width: 150px;border: none;margin-bottom:25px;" onclick="settingsPage()">
+                                <span class="fa-solid fa-gear" style="margin-right:30px;"></span>Settings
+                            </button>
+                            
+                            <button id="logoutButton" style="width: 150px;border: none;">
+                                <span class="fas fa-sign-out-alt" style="margin-right:30px;"></span>Logout
+                            </button>                            
                         </div>
                     </div>           
                 </div>
@@ -80,9 +114,19 @@
                 Swal.fire("Logged out!", "You have been logged out.", "success");
 
                 setTimeout(function() {
-                    window.location.href = "http://localhost/clone/index.php";
+                    window.location.href = "https://trashlevelmonitoring.shop/";
                 }, 2000);
             }
         });
     });
+</script>
+
+<script>
+  function settingsPage() {
+    var newPageUrl = "settings.php";
+
+    setTimeout(function () {
+      window.location.href = newPageUrl;
+    }, 1000);
+  }
 </script>

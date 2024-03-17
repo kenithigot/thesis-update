@@ -1,3 +1,4 @@
+
  <!-- Favicon -->
  <link href="img/favicon.ico" rel="icon">
 
@@ -45,12 +46,32 @@
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
                  <!-- <img src="lasalle.png" alt="Image 2" style="height: 150px;"> -->
-                <img class="rounded-circle" src="imgs/user.png" alt="" style="width: 40px; height: 40px;">
+                <?php
+                
+                    include('authentication.php');
+                    $userID = $_SESSION['admin_id'];
+                    $query = "SELECT * FROM add_admin WHERE admin_id = $userID";
+                    $sql_run =  mysqli_query($conn, $query);
+
+                    $user = mysqli_num_rows($sql_run) > 0;
+
+                    if($user){
+                        while($row = mysqli_fetch_assoc($sql_run)){
+                ?>
+                <a href="user_information.php">
+                <img class="rounded-circle" src="<?php echo $row['profilePicture']; ?>" style="width: 45px; height: 45px;border:1px solid green;">
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3" style="text-color:#0f1116;">
-                <h6 class="mb-0">General Service Office</h6>
-                <span>Admin</span>
+            
+                <h6 class="mt-0 mb-1" style="font-family:Open Sans;"><?php echo $row['firstName'] . ' ' . $row['lastName']; ?></h6>
+
+                <span style="color:black;"><?php echo $row['user_type']; ?></span>
+                </a>
+            <?php
+                    }
+                }
+                ?>
             </div>
         </div>
         <div class="navbar-nav w-100">

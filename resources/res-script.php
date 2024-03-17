@@ -121,64 +121,7 @@
     });
 </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const statusButtons = document.querySelectorAll(".send-btn");
 
-        statusButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                const staffId = this.getAttribute("data-staffid");
-
-                Swal.fire({
-                    title: 'Send Notification',
-                    text: 'By clicking the "Send", the staff will be notified',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Send',
-                    cancelButtonText: 'Cancel',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return fetch("smsapi/index.php", {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
-                            },
-                            body: `staff_id=${staffId}`
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(response.statusText);
-                            }
-                            return response.json();
-                        })
-                        .catch(error => {
-                            Swal.showValidationMessage(
-                                `Request failed: ${error}`
-                            );
-                        });
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
-                }).then(result => {
-                    if (result.isConfirmed) {
-                        if (result.value && result.value.status === 'success') {
-                            Swal.fire(
-                                'Status Updated',
-                                result.value.message,
-                                'success'
-                            );
-                        } else {
-                            Swal.fire(
-                                'Error',
-                                'Failed to update status',
-                                'error'
-                            );
-                        }
-                    }
-                });
-            });
-        });
-    });
-</script>
 
 <script>
     function redirect() {

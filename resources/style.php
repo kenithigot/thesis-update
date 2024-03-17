@@ -13,6 +13,7 @@
     font-family: serif;
     font-size: 23px;
     margin-top:15px;
+    
 }
 .custom-div-6 {
     text-align: justify;
@@ -66,5 +67,40 @@ select option:checked {
     pointer-events: none;
 }
 
+.settings-block{
+    display:flex;
+    flex-direction:column;
+    width:220px;
+}
+
+.icon-size{
+    font-size:25px;
+}
+
+.block-a{
+    color:black;
+    margin:12px;
+    font-size:16px;
+    
+}
+
+.label-password{
+    margin-top:30px;
+    font-size:18px;
+}
+
+.form-control{
+    padding: 8px;
+    border-radius:0.5rem;
+    color:black;
+    width:400px;
+    text-align:center;
+}
+
+.button-submit{
+    width:400px;
+    color:black;
+    padding: 8px;
+}
 
 </style>

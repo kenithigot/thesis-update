@@ -1,23 +1,14 @@
-<?php
-session_start(); 
-?>
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Sidebar -->
-<?php include('includes/sidebar.php'); ?>
-
-<!-- Navigation bar -->
-<?php include('includes/topbar.php');?>
 
 <!-- Loading bar -->
 <?php include('spinner.php');?>
 
 <!-- Db_datadelete connection -->
-<?php include('db_connections/bin7_bin8/db_datadelete4.php'); ?>
+<?php include('db_connections/bin1_bin2/db_datadelete.php'); ?>
 
 <!-- Db_status connection -->
-<?php include('db_connections/bin7_bin8/db_status4.php'); ?>
+<?php include('db_connections/bin1_bin2/db_status.php'); ?>
                        
 <head>
 
@@ -40,14 +31,33 @@ session_start();
 
     <!-- dashboard-style -->
     <?php include('resources/dashboard-style.php');?>
-
+    
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php
+            if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
+                // Unset the login_success session variable to prevent the message from showing on page reload
+                unset($_SESSION['login_success']);
+                ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Hello <?php echo $_SESSION['user_type']; ?>, Welcome back!',
+                });
+            <?php
+            }
+            ?>
+        });
+    </script>
+
+
+
     <script>
         function updateProgressBars() {
             $.ajax({
-                url: 'db_connections/bin7_bin8/get_bin_data4.php',
+                url: 'db_connections/bin1_bin2/get_bin_data.php',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -75,7 +85,7 @@ session_start();
     <script>
         function refreshButtonColors() {
             $.ajax({
-                url: 'db_connections/bin7_bin8/get_button_colors4.php',
+                url: 'db_connections/bin1_bin2/get_button_colors.php',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -95,6 +105,16 @@ session_start();
         // Refresh button colors 
         setInterval(refreshButtonColors, 10000);
     </script>
+
+    <script>
+        function preventBack(){
+            window.history.forward()
+        };
+            setTimeout("preventBack()", 0);
+                window.onunload = function(){
+                null;
+            } 
+    </script>
   
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
@@ -108,20 +128,20 @@ session_start();
         <?php
             include('authentication.php');
 
-            $query = "SELECT location4 FROM thesis_data4";
+            $query = "SELECT location1 FROM thesis_data";
             $result = $conn->query($query);
 
             if ($result && $result->num_rows > 0) { 
                 $row = $result->fetch_assoc();
-                $location4 = $row['location4'];
+                $location1 = $row['location1'];
             } else {
-                $location4 = "Add Location"; 
+                $location1 = "Add Location"; 
             }
             $conn->close();
         ?>
 
         <h3 class="mb-5" style="text-align: center; padding-top: 10px; margin: 0; position: relative;">
-            Location: &nbsp;&nbsp;<u id="displayedLocation"><?php echo $location4; ?></u>
+            Location: &nbsp;&nbsp;<u id="displayedLocation"><?php echo $location1; ?></u>
             <button class="location-btn" data-toggle="modal" data-target="#editmodal">
                 <i class="bi bi-pencil-square btnicon"></i>
             </button>
@@ -142,7 +162,7 @@ session_start();
                         <div class="modal-body">               
                             <div class="form-group">
                                 <label> Location: </label>
-                                <input type="text" name="location4" id="location4" class="form-control"
+                                <input type="text" name="location1" id="location1" class="form-control"
                                     placeholder="Type the Location" required>
                             </div>                          
                         </div>
@@ -155,10 +175,9 @@ session_start();
             </div>
         </div>
 
-        <!-- Split dropup button -->
-        <div class="dropdown-dash" style="margin-top:-30px;">
+        <div class="dropdown-dash text-center" style="margin-top:-30px;">
             <select name="selectedbin" id="selectedbin" class="select-success" onchange="redirect()">
-                <option value=""selected disabled>Select Bin Here</option>
+                <option value="" selected disabled>Select Bin Here</option>
                 <option value="dashboard.php">Trash Bin 1 and 2</option>
                 <option value="dashboardv2.php">Trash Bin 3 and 4</option>
                 <option value="dashboardv3.php">Trash Bin 5 and 6</option>
@@ -174,7 +193,7 @@ session_start();
                     <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto;border-radius: 0.5rem;background-color:gray;">
                         <div class="ms-3">
                             <div class="text-center">
-                                <h4>Trash Bin 7</h4>
+                                <h4>Trash Bin 1</h4>
                                 <h6 style="margin-top:-7px;margin-bottom:20px;">[ Biodegradable ]</h6>
                             </div>
                             <div class="progress-container" style="width: 100%;">
@@ -211,7 +230,7 @@ session_start();
                             <div class="square-orange" style="border: solid; height: 30px; width: 30px; background-color: #fdb81c; margin-right: 10px;"></div>
                             <h5 class="mt-1">HALF-FULL</h5>
                         </div>
-                        <p class="text-center">Height of the trash is <strong> >= 15 cm</strong> and <strong><</strong> <strong> 40 cm</strong></p>    
+                        <p class="text-center">Height of the trash is <strong> >= 15 cm</strong> and <strong><</strong><strong> 40 cm</strong></p>    
                         <div class="mb-1 d-flex align-items-start justify-content-start">
                             <div class="square-red" style="border: solid; height: 30px; width: 30px; background-color: #fd100f; margin-right: 10px;"></div>           
                             <h5 class="mt-1">FULL</h5>
@@ -224,7 +243,7 @@ session_start();
                     <div class="bg-secondary rounded d-flex flex-column align-items-center justify-content-between p-4" style="max-width:430px; margin: 0 auto; border-radius: 0.5rem;">
                         <div class="ms-3">
                             <div class="text-center">
-                                <h4>Trash Bin 8</h4>
+                                <h4>Trash Bin 2</h4>
                                 <h6 style="margin-top:-7px;margin-bottom:20px;">[ Non-Biodegradable ]</h6>
                             </div>
                             <div class="progress-container" style="width: 100%;">
@@ -253,17 +272,16 @@ session_start();
             <div style="margin-left: 25px; margin-right: 25px; text-align: center; margin-top:-20px;"> 
                 <div class="containertab">
                     <div class="trash-table">
-                        <h3>Trash Bin 7</h3>
+                        <h3>Trash Bin 1</h3>
                     </div>
                     <div class="btn-containertab" style="margin-top:15px;">
                         <form action="" method="POST">
-                            <button type="submit" name="delete" class="btn btn-primary mt-4" style="padding:5px 10px;border-radius: 0.5rem; font-size: 16px; color: black; margin-bottom: 10px; background-color: white;">Delete Data</button>
+                            <button type="submit" name="delete" class="btn btn-primary" style="padding:5px 10px;border-radius: 0.5rem; font-size: 16px; color: black; margin-bottom: 10px; background-color: white;">Delete Data</button>
                         </form>
                     </div>
                 </div>
-                
                 <div class="table-responsive">
-                    <table id="trash-bin1" class="display" style="width:100%">
+                    <table id="trash-bin1" class="display">
                         <thead>
                             <tr style="text-align:center;">
                                 <th>Date</th>
@@ -277,13 +295,13 @@ session_start();
                         <script>
                             $(document).ready(function () {
                                 var table = $('#trash-bin1').DataTable({
-                                    ajax: 'db_connections/bin7_bin8/db_dashboardv4.php',
+                                    ajax: 'db_connections/bin1_bin2/db_dashboard.php',
                                     columns: [
                                         { data: 'timestamp_date'},
                                         { data: 'timestamp_time'},
                                         { data: 'trash_type1'},
-                                        { data: 'bin7'},
-                                        { data: 'status7'},
+                                        { data: 'bin1'},
+                                        { data: 'status1'},
                                     ],
                                     columnDefs: [
                                         { className: 'dt-center', targets: '_all' }
@@ -292,7 +310,7 @@ session_start();
                                     buttons: [
                                         'copy', 'csv', 'pdf'
                                     ],
-                                     order: [[0, 'desc']],
+                                    order: [[0, 'desc']],
                                     responsive: {
                                         details: {
                                             timeout: 5000 
@@ -308,8 +326,8 @@ session_start();
                 </div>
                 
                 <div class="table-responsive">
-                <div class="trash-table"><h3>Trash Bin 8</h3></div>            
-                    <table id="trash-bin2" class="display" style="width:100%">
+                    <div class="trash-table"><h3>Trash Bin 2</h3></div>            
+                    <table id="trash-bin2" class="display">
                         <thead>
                             <tr style="text-align:center;">
                                 <th>Date</th>
@@ -323,13 +341,13 @@ session_start();
                         <script>
                             $(document).ready(function () {
                                 var table = $('#trash-bin2').DataTable({
-                                    ajax: 'db_connections/bin7_bin8/db_dashboardv4.php',
+                                    ajax: 'db_connections/bin1_bin2/db_dashboard.php',
                                     columns: [
                                         { data: 'timestamp_date'},
                                         { data: 'timestamp_time'},
                                         { data: 'trash_type2'},
-                                        { data: 'bin8'},
-                                        { data: 'status8'},
+                                        { data: 'bin2'},
+                                        { data: 'status2'},
                                     ],
                                     columnDefs: [
                                         { className: 'dt-center', targets: '_all' }
@@ -338,7 +356,7 @@ session_start();
                                     buttons: [
                                         'copy', 'csv', 'pdf'
                                     ],
-                                     order: [[0, 'desc']],
+                                   order: [[0, 'desc']],
                                     responsive: {
                                         details: {
                                             timeout: 5000 
@@ -369,17 +387,17 @@ session_start();
     $(document).ready(function () {
         $('.location-btn').on('click', function () {
             var location = $('#displayedLocation').text();
-            $('#location4').val(location);
+            $('#location1').val(location);
             $('#editmodal').modal('show');
         });
 
         $('#savelocationbtn').on('click', function () {
-            var newLocation = $('#location4').val();
+            var newLocation = $('#location1').val();
 
             if (newLocation) {
                 $.ajax({
                     type: "POST",
-                    url: "db_connections/bin7_bin8/db_location4.php",
+                    url: "db_connections/bin1_bin2/db_location1.php",
                     data: $('#editForm').serialize(),
                     success: function (response) {
                         if (response.trim() === "success") {

@@ -1,8 +1,8 @@
 <?php 
 define('DB_HOST'    , 'localhost'); 
-define('DB_USERNAME', 'u959174543_thesis2'); 
-define('DB_PASSWORD', 'MsKQm0x0#J5$'); 
-define('DB_NAME'    , 'u959174543_thesis2');
+define('DB_USERNAME', 'u959174543_trash'); 
+define('DB_PASSWORD', 'ComputerEngineer2000'); 
+define('DB_NAME'    , 'u959174543_trashlevel');
 
 define('POST_DATA_URL', 'http://trashlevelmonitoring.shop/sensordata.php');
 

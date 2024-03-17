@@ -1,3 +1,6 @@
+<?php
+session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +40,9 @@
 
     <!-- dashboard-style -->
     <?php include('resources/dashboard-style.php');?>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
     <script>
         function updateProgressBars() {
@@ -150,7 +156,7 @@
         </div>
 
         <!-- Split dropup button -->
-        <div class="dropdown-dash">
+        <div class="dropdown-dash" style="margin-top:-30px;">
             <select name="selectedbin" id="selectedbin" class="select-success" onchange="redirect()">
                 <option value=""selected disabled>Select Bin Here</option>
                 <option value="dashboard.php">Trash Bin 1 and 2</option>
@@ -205,12 +211,12 @@
                             <div class="square-orange" style="border: solid; height: 30px; width: 30px; background-color: #fdb81c; margin-right: 10px;"></div>
                             <h5 class="mt-1">HALF-FULL</h5>
                         </div>
-                        <p class="text-center">Height of the trash is <strong> >= 15 cm</strong> and <strong><=</strong> to <strong>36 cm</strong></p>    
+                        <p class="text-center">Height of the trash is <strong> >= 15 cm</strong> and <strong><</strong> <strong> 40 cm</strong></p>    
                         <div class="mb-1 d-flex align-items-start justify-content-start">
                             <div class="square-red" style="border: solid; height: 30px; width: 30px; background-color: #fd100f; margin-right: 10px;"></div>           
                             <h5 class="mt-1">FULL</h5>
                         </div>
-                        <p class="text-center">Height of the trash is <strong> > 36 cm</strong></p>
+                        <p class="text-center">Height of the trash is <strong> >= 40 cm</strong></p>
                     </div>
                 </div>
 
@@ -249,90 +255,103 @@
                     <div class="trash-table">
                         <h3>Trash Bin 9</h3>
                     </div>
-                    <div class="btn-containertab">
+                    <div class="btn-containertab" style="margin-top:15px;">
                         <form action="" method="POST">
                             <button type="submit" name="delete" class="btn btn-primary mt-4" style="padding:5px 10px;border-radius: 0.5rem; font-size: 16px; color: black; margin-bottom: 10px; background-color: white;">Delete Data</button>
                         </form>
                     </div>
                 </div>
-                <table id="trash-bin1" class="display" style="width:100%">
-                    <thead>
-                        <tr style="text-align:center;">
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Trash Type</th>
-                            <th>Trash Level (cm)</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <script>
-                        $(document).ready(function () {
-                            var table = $('#trash-bin1').DataTable({
-                                ajax: 'db_connections/bin9_bin10/db_dashboardv5.php',
-                                columns: [
-                                    { data: 'timestamp_date'},
-                                    { data: 'timestamp_time'},
-                                    { data: 'trash_type1'},
-                                    { data: 'bin9'},
-                                    { data: 'status9'},
-                                ],
-                                columnDefs: [
-                                    { className: 'dt-center', targets: '_all' }
-                                ],
-                                dom: 'lBfrtip',
-                                buttons: [
-                                    'copy', 'csv', 'pdf'
-                                ],
-                                order: [[0, 'desc']]
-                            });
-
-                            setInterval(function () {
-                                table.ajax.reload(null, false);
-                            }, 1000);
-                        });
-                    </script>
-                </table><br>
                 
-                <div class="trash-table"><h3>Trash Bin 10</h3></div>            
-                <table id="trash-bin2" class="display" style="width:100%">
-                    <thead>
-                        <tr style="text-align:center;">
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Trash Type</th>
-                            <th>Trash Level (cm)</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <script>
-                        $(document).ready(function () {
-                            var table = $('#trash-bin2').DataTable({
-                                ajax: 'db_connections/bin9_bin10/db_dashboardv5.php',
-                                columns: [
-                                    { data: 'timestamp_date'},
-                                    { data: 'timestamp_time'},
-                                    { data: 'trash_type2'},
-                                    { data: 'bin10'},
-                                    { data: 'status10'},
-                                ],
-                                columnDefs: [
-                                    { className: 'dt-center', targets: '_all' }
-                                ],
-                                dom: 'lBfrtip',
-                                buttons: [
-                                    'copy', 'csv', 'pdf'
-                                ],
-                                order: [[0, 'desc']]
+                <div class="table-responsive">
+                    <table id="trash-bin1" class="display" style="width:100%">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Trash Type</th>
+                                <th>Trash Level (cm)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+    
+                        <script>
+                            $(document).ready(function () {
+                                var table = $('#trash-bin1').DataTable({
+                                    ajax: 'db_connections/bin9_bin10/db_dashboardv5.php',
+                                    columns: [
+                                        { data: 'timestamp_date'},
+                                        { data: 'timestamp_time'},
+                                        { data: 'trash_type1'},
+                                        { data: 'bin9'},
+                                        { data: 'status9'},
+                                    ],
+                                    columnDefs: [
+                                        { className: 'dt-center', targets: '_all' }
+                                    ],
+                                    dom: 'lBfrtip',
+                                    buttons: [
+                                        'copy', 'csv', 'pdf'
+                                    ],
+                                   order: [[0, 'desc']],
+                                    responsive: {
+                                        details: {
+                                            timeout: 5000 
+                                        }
+                                    }
+                                });
+                                setInterval(function () {
+                                    table.ajax.reload(null, false);
+                                }, 1000);
                             });
-
-                            setInterval(function () {
-                                table.ajax.reload(null, false);
-                            }, 1000);
-                        });
-                    </script>
-                </table>
+                        </script>
+                    </table><br>
+                </div>
+                
+                <div class="table-responsive">
+                    <div class="trash-table"><h3>Trash Bin 10</h3></div>            
+                    <table id="trash-bin2" class="display" style="width:100%">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Trash Type</th>
+                                <th>Trash Level (cm)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+    
+                        <script>
+                            $(document).ready(function () {
+                                var table = $('#trash-bin2').DataTable({
+                                    ajax: 'db_connections/bin9_bin10/db_dashboardv5.php',
+                                    columns: [
+                                        { data: 'timestamp_date'},
+                                        { data: 'timestamp_time'},
+                                        { data: 'trash_type2'},
+                                        { data: 'bin10'},
+                                        { data: 'status10'},
+                                    ],
+                                    columnDefs: [
+                                        { className: 'dt-center', targets: '_all' }
+                                    ],
+                                    dom: 'lBfrtip',
+                                    buttons: [
+                                        'copy', 'csv', 'pdf'
+                                    ],
+                                    order: [[0, 'desc']],
+                                    responsive: {
+                                        details: {
+                                            timeout: 5000 
+                                        }
+                                    }
+                                });
+                                setInterval(function () {
+                                    table.ajax.reload(null, false);
+                                }, 1000);
+                            });
+                        </script>
+                    </table>
+                </div>
             </div>
         </div><br>
 

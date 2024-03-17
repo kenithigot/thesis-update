@@ -1,3 +1,6 @@
+<?php
+session_start(); 
+?>
 <!DOCTYPE html>
 
 <!-- Sidebar -->
@@ -12,7 +15,7 @@
 <head>
 
     <!-- Header -->
-    <?php include('includes/header.php');?>
+    <!--<?php include('includes/header.php');?>-->
 
     <title>Trash Level Monitoring - Overview</title>
 
@@ -61,13 +64,13 @@
                                 </button>
                             </li>
 
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link btn btn-success" id="pills-document-tab" data-bs-toggle="pill"
-                                    data-bs-target="#pills-document" type="button" role="tab" aria-controls="pills-document" aria-selected="false"
-                                    style="width:150px;border-radius:30px;">
-                                    <i class="fas fa-photo-video" style="width:100px;font-size:30px;"></i><br>
-                                </button>
-                            </li>
+                            <!--<li class="nav-item" role="presentation">-->
+                            <!--    <button class="nav-link btn btn-success" id="pills-document-tab" data-bs-toggle="pill"-->
+                            <!--        data-bs-target="#pills-document" type="button" role="tab" aria-controls="pills-document" aria-selected="false"-->
+                            <!--        style="width:150px;border-radius:30px;">-->
+                            <!--        <i class="fas fa-photo-video" style="width:100px;font-size:30px;"></i><br>-->
+                            <!--    </button>-->
+                            <!--</li>-->
 
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link btn btn-success" id="pills-developers-tab" data-bs-toggle="pill"
@@ -166,13 +169,13 @@
 
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-document" role="tabpanel" aria-labelledby="pills-document-tab">
-                        <div class="row">
-                            <div class="col-md-12"><br>                   
-                                <h5 style="text-align:center;font-size:30px; font-family: Georgia, serif;">DOCUMENTATION</h5>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="tab-pane fade" id="pills-document" role="tabpanel" aria-labelledby="pills-document-tab">-->
+                    <!--    <div class="row">-->
+                    <!--        <div class="col-md-12"><br>                   -->
+                    <!--            <h5 style="text-align:center;font-size:30px; font-family: Georgia, serif;">DOCUMENTATION</h5>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                     <div class="tab-pane fade" id="pills-developers" role="tabpanel" aria-labelledby="pills-developers-tab">
                         <br>
                         <div class="row">

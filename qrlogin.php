@@ -1,8 +1,6 @@
 <!-- Db_con connection -->
-<?php include('db_connections/db_signin.php'); ?>
-
-<!-- Loading bar -->
-<?php include('spinner.php');?>
+ <!-- Header -->
+ <?php include('db_qrcode.php');?>
 
 <!DOCTYPE html>
 
@@ -107,6 +105,33 @@ body {
     font-size: 50px;
     color: white;
 }
+    #video-container {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    #video {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    #capture-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #status {
+      margin-top: 10px;
+    }
 </style>
 
 </head>
@@ -119,67 +144,67 @@ body {
     </div>
     <div class="container-login">
         <div class="container-font">
-            <h3>LOGIN - ADMIN</h3>
+            <h3>QR CODE - LOGIN</h3>
         </div>
-        <form action="" method="POST" style="margin-bottom:5px;">  
-            <div class="form-floating mb-3">
-                <div class="input-group">
-                    <span class="input-group-text" style="font-size:20px;">
-                        <i class="fas fa-user-alt"></i>
-                    </span>
-                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" style="padding: 15px;border-radius: 0 .5rem .5rem 0;color:black;"required>
-                </div>
-            </div>
-            <div class="form-floating mb-3">
-                <div class="input-group">
-                    <span class="input-group-text" style="font-size:20px;">
-                        <i class="fas fa-key"></i>
-                    </span>
-                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" style="padding: 15px;border-radius: 0 .5rem .5rem 0;color:black;"required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" id="login-button" style="margin-top:30px;">Sign In</button>
-        </form>
-        <br>
-        <div class="container-font" >
-            <h6>
-                Want to view the data?
-                <a href="qrlogin.php" style="color:black;border-bottom:1px solid black;">Click Here!</a>
-            </h6>
+        <div id="video-container">
+            <video id="video" autoplay playsinline></video>
+            <button id="capture-btn" onclick="captureImage()">Capture</button>
         </div>
+        <p id="status"></p>
     </div>
-        
-    <script>
-        <?php
-            if ($loginStatus === false) {
-                echo 'Swal.fire({
-                    icon: "error",
-                    title: "Invalid Credentials",
-                    text: "Incorrect email or password",
-                });';
-            }
-            else if ($loginStatus === true) {
-                echo 'Swal.fire({
-                    icon: "error",
-                    title: "Good",
-                    text: "Incorrect email or password",
-                });';
-            }
-        ?>
-        document.getElementById("login-button").addEventListener("click", function(event) {
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
 
-            if (!email || !password) {
-                event.preventDefault();
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Can\'t Login',
-                    text: 'Please fill in both email and password!',
-                });
-            }
-        });
-    </script>
 
+<script>
+    let videoStream;
+
+    async function startCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+            const video = document.getElementById('video');
+            video.srcObject = stream;
+            videoStream = stream;
+        } catch (error) {
+            console.error('Error accessing camera:', error);
+        }
+    }
+
+    function stopCamera() {
+        if (videoStream) {
+            const tracks = videoStream.getTracks();
+            tracks.forEach(track => track.stop());
+        }
+    }
+
+    async function captureImage() {
+        const video = document.getElementById('video');
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if (code) {
+            if (code.data === '<?php echo $usernameFromDatabase; ?>') {
+                document.getElementById('status').innerText = 'Login successful!';
+
+                setTimeout(function() {
+                window.location.href = 'user_information.php';
+            }, 5000); // 5000 milliseconds = 5 seconds
+            } else {
+                document.getElementById('status').innerText = 'Invalid QR code.';
+            }
+        } else {
+                document.getElementById('status').innerText = 'No QR code found in the image.';
+        }
+    }
+
+    // Start the camera when the page loads
+    startCamera();
+</script>
+
+<script src="https://cdn.rawgit.com/cozmo/jsQR/master/dist/jsQR.js"></script>
 </body>
 </html>

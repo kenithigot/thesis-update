@@ -1,6 +1,3 @@
-<!-- Db_con connection -->
-<?php include('db_connections/db_signin.php'); ?>
-
 <!-- Loading bar -->
 <?php include('spinner.php');?>
 
@@ -9,36 +6,6 @@
 <html>
 <head>
 
-    <!-- Header -->
-    <?php include('includes/header.php');?>
-
-    <!-- Libraries -->
-    <?php include('resources/libraries.php');?>
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
-
-    <!-- JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-
-<script>
-    function preventBack(){
-        window.history.forward()
-    };
-        setTimeout("preventBack()", 0);
-            window.onunload = function(){
-            null;
-        } 
-</script>
 
 <style>
 
